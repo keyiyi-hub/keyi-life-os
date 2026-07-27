@@ -3,7 +3,9 @@ import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
 // 柯仪宜 Life OS — Vite 配置
+// base 设为仓库名,适配 GitHub Pages 子路径
 export default defineConfig({
+  base: '/keyi-life-os/',
   plugins: [
     react(),
     VitePWA({
