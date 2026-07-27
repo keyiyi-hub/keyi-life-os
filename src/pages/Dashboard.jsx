@@ -1,30 +1,23 @@
 import { motion } from 'framer-motion'
-import DashboardHeader from '../components/dashboard/DashboardHeader'
+import TodayStatus from '../components/dashboard/TodayStatus'
 import OneThingCard from '../components/dashboard/OneThingCard'
-import TodoList from '../components/dashboard/TodoList'
 import TimeInvestment from '../components/dashboard/TimeInvestment'
-import ProjectCards from '../components/dashboard/ProjectCards'
-import BodyStatus from '../components/dashboard/BodyStatus'
-import CreationChecklist from '../components/dashboard/CreationChecklist'
-import WealthOverview from '../components/dashboard/WealthOverview'
+import LongTermGoals from '../components/dashboard/LongTermGoals'
 import ReviewEntry from '../components/dashboard/ReviewEntry'
 
 /**
  * Dashboard — 人生驾驶舱首页
  *
- * 设计目标:让用户看到的是人生,而不是任务
- * 30 秒内明确今天最重要的方向
+ * 定位:人生驾驶舱，而不是任务清单。
+ * 用户每天早上打开一次、晚上关闭一次。
+ * 首页让人在 30 秒内看见"人生方向"，而不是被任务淹没。
  *
- * 信息层次(从上到下,即信息优先级):
- * 1. Header 定调(日期 + 鼓励语)
- * 2. MIT 今日最重要一件事(视觉焦点)
- * 3. 今日待办(最多 5 项,克制)
- * 4. 今日时间投入(时间花在哪里 = 人生)
- * 5. 当前推进项目(长期人生方向)
- * 6. 身体状态(底层资产)
- * 7. 今日创作(通往财富自由的杠杆)
- * 8. 财富概览(长期目标进度)
- * 9. 晚间复盘入口(晚上关闭)
+ * 五大模块(从上到下 = 信息优先级):
+ * 1. 今日状态卡片 — 日期 / 今日一句话 / 精力 / 睡眠
+ * 2. 今日最重要的一件事(MIT) — 早晨闭环起点
+ * 3. 今日时间投入 — 时间花在哪里 = 人生
+ * 4. 长期目标进度 — 教师成长 / 自媒体 / 财富 / 买房
+ * 5. 晚间复盘入口 — 晚上闭环:今天积累了什么
  */
 export default function Dashboard() {
   return (
@@ -33,14 +26,10 @@ export default function Dashboard() {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3 }}
     >
-      <DashboardHeader />
+      <TodayStatus />
       <OneThingCard />
-      <TodoList />
       <TimeInvestment />
-      <ProjectCards />
-      <BodyStatus />
-      <CreationChecklist />
-      <WealthOverview />
+      <LongTermGoals />
       <ReviewEntry />
     </motion.div>
   )

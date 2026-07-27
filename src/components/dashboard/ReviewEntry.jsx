@@ -6,8 +6,8 @@ import { todayStr, isEvening } from '../../lib/date'
 import GlassCard from '../ui/GlassCard'
 
 /**
- * ReviewEntry — 今日复盘入口
- * 呼应"晚上关闭"节奏:记录一天、安心收尾
+ * ReviewEntry — 晚间复盘入口
+ * 呼应"晚上关闭"节奏:今天积累了什么? → 复盘 → 数据沉淀
  */
 export default function ReviewEntry() {
   const navigate = useNavigate()
@@ -38,13 +38,13 @@ export default function ReviewEntry() {
             </div>
             <div>
               <h3 className="text-[15px] font-semibold text-primary">
-                {reviewed ? '今日已复盘' : '晚间复盘'}
+                {reviewed ? '今日已复盘' : '今天积累了什么？'}
               </h3>
               <p className="text-[12px] text-tertiary mt-0.5">
                 {reviewed
                   ? '今天辛苦了，安心休息'
                   : evening
-                  ? '回顾今天，记录收获'
+                  ? '回顾今天，把收获留下来'
                   : '今晚记得来复盘'}
               </p>
             </div>

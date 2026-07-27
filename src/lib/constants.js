@@ -46,7 +46,7 @@ export const MOBILE_TABS = [
 
 /** 今日时间投入 7 分类 */
 export const TIME_CATEGORIES = [
-  { key: 'growth', label: '成长', color: '#7C9885', icon: '🌱' },
+  { key: 'growth', label: '学习/成长', color: '#7C9885', icon: '🌱' },
   { key: 'work', label: '工作', color: '#A3B8A2', icon: '💼', sub: '生存' },
   { key: 'creation', label: '创作', color: '#5E7E68', icon: '🎬' },
   { key: 'recovery', label: '恢复', color: '#C9D6C8', icon: '🌙' },
@@ -103,6 +103,24 @@ export const MOOD_OPTIONS = [
   { value: 2, emoji: '😕', label: '低落' },
   { value: 1, emoji: '😢', label: '糟糕' }
 ]
+
+/** 精力状态选项 */
+export const ENERGY_OPTIONS = [
+  { value: 1, emoji: '😴', label: '很低' },
+  { value: 2, emoji: '😐', label: '偏低' },
+  { value: 3, emoji: '🙂', label: '一般' },
+  { value: 4, emoji: '😊', label: '不错' },
+  { value: 5, emoji: '⚡', label: '充沛' }
+]
+
+/** 长期目标默认数据(可逐步调整) */
+export const GOALS_DEFAULT = [
+  { key: 'teacher', title: '教师成长', emoji: '👩‍🏫', progress: 40, note: '站稳讲台，成为更好的老师', path: '/teacher' },
+  { key: 'creation', title: '自媒体创作', emoji: '🎥', progress: 15, note: '从 0 到 1，持续输出', path: '/creation' },
+  { key: 'wealth', title: '财富积累', emoji: '💰', progress: 12, note: '每月定投，慢慢变富', path: '/wealth' },
+  { key: 'house', title: '买房计划', emoji: '🏠', progress: 5, note: '把妈妈接来一起生活', path: '/house' }
+]
+
 
 /** 鼓励语池(可随机/可配置) */
 export const ENCOURAGEMENTS = [

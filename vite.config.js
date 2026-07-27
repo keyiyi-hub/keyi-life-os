@@ -15,12 +15,13 @@ export default defineConfig({
         name: '柯仪宜 Life OS',
         short_name: 'Life OS',
         lang: 'zh-CN',
+        id: '/keyi-life-os/',
         description: '个人人生驾驶舱 — 让人生一点一点变好',
         theme_color: '#0F1311',
         background_color: '#0F1311',
         display: 'standalone',
         orientation: 'portrait',
-        start_url: '/keyi-life-os/',
+        start_url: '/keyi-life-os/?source=pwa',
         scope: '/keyi-life-os/',
         icons: [
           {

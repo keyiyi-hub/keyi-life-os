@@ -1,7 +1,7 @@
 import { createContext, useContext, useMemo, useCallback } from 'react'
 import { useLocalStorage } from '../lib/useLocalStorage'
 import { todayStr } from '../lib/date'
-import { ENCOURAGEMENTS } from '../lib/constants'
+import { ENCOURAGEMENTS, GOALS_DEFAULT } from '../lib/constants'
 
 // =========================================================
 // AppContext — 全局应用状态
@@ -26,6 +26,7 @@ export function AppProvider({ children }) {
     weight: null,
     exercise: null,
     mood: null,
+    energy: null,
     water: 0,
     period: null
   })
@@ -41,6 +42,9 @@ export function AppProvider({ children }) {
     Math.floor(Math.random() * ENCOURAGEMENTS.length)
   )
   const encouragement = ENCOURAGEMENTS[encouragementIdx % ENCOURAGEMENTS.length]
+
+  // 长期目标进度(跨日持久)
+  const [goals, setGoals] = useLocalStorage('goals', GOALS_DEFAULT)
 
   // ---- 待办操作 ----
   const addTodo = useCallback(
@@ -105,6 +109,15 @@ export function AppProvider({ children }) {
     [setCreation]
   )
 
+  // ---- 长期目标操作 ----
+  const setGoalProgress = useCallback(
+    (key, value) => {
+      const v = Math.max(0, Math.min(100, Math.round(value)))
+      setGoals((prev) => prev.map((g) => (g.key === key ? { ...g, progress: v } : g)))
+    },
+    [setGoals]
+  )
+
   const value = useMemo(
     () => ({
       today,
@@ -124,7 +137,9 @@ export function AppProvider({ children }) {
       creation,
       toggleCreation,
       // 长期
-      encouragement
+      encouragement,
+      goals,
+      setGoalProgress
     }),
     [
       today,
@@ -142,7 +157,9 @@ export function AppProvider({ children }) {
       updateBody,
       creation,
       toggleCreation,
-      encouragement
+      encouragement,
+      goals,
+      setGoalProgress
     ]
   )
 

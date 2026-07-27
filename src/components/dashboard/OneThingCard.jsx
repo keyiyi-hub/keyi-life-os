@@ -7,7 +7,7 @@ import GlassCard from '../ui/GlassCard'
 /**
  * OneThingCard — 今日最重要的一件事(MIT)
  * 全页视觉焦点,一天只能填一条,完成可勾选
- * 这是 Life OS 的核心:30 秒内明确今天方向
+ * 早晨闭环的起点:今天最重要的一件事是什么?
  */
 export default function OneThingCard() {
   const { mit, setMitText, toggleMit } = useApp()
@@ -27,11 +27,18 @@ export default function OneThingCard() {
         style={{ background: 'var(--accent)' }}
       />
       <div className="relative">
-        <div className="flex items-center gap-2 mb-3">
-          <Target size={15} className="text-accent" strokeWidth={2.2} />
-          <span className="text-xs font-medium text-accent tracking-wide">
-            今日最重要的一件事
-          </span>
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center gap-2">
+            <Target size={15} className="text-accent" strokeWidth={2.2} />
+            <span className="text-xs font-medium text-accent tracking-wide">
+              今日最重要的一件事
+            </span>
+          </div>
+          {mit.done && (
+            <span className="text-[11px] text-accent font-medium px-2 py-0.5 rounded-full bg-accent-soft">
+              已完成
+            </span>
+          )}
         </div>
 
         {editing ? (
@@ -42,7 +49,7 @@ export default function OneThingCard() {
               onChange={(e) => setDraft(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && commit()}
               onBlur={commit}
-              placeholder="今天，只要做好这件事就够了…"
+              placeholder="今天最重要的一件事是什么？"
               className="flex-1 bg-transparent text-lg font-medium text-primary placeholder:text-tertiary outline-none border-b border-[var(--border)] pb-1 focus:border-sage-300 transition-colors"
             />
           </div>
@@ -85,7 +92,7 @@ export default function OneThingCard() {
                 mit.done ? 'text-tertiary line-through' : 'text-primary'
               }`}
             >
-              {mit.text || '点击设置今天最重要的一件事'}
+              {mit.text || '点击写下今天最重要的一件事'}
             </p>
           </motion.button>
         )}
