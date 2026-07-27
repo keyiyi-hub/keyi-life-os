@@ -12,7 +12,8 @@ import GlassCard from '../ui/GlassCard'
 export default function ReviewEntry() {
   const navigate = useNavigate()
   const today = todayStr()
-  const [reviewed] = useLocalStorage(`review:done:${today}`, false)
+  const [review] = useLocalStorage(`review:${today}`, { done: false })
+  const reviewed = !!review?.done
   const evening = isEvening()
 
   return (
