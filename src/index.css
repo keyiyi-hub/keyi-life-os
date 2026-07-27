@@ -1,0 +1,174 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================================================
+   柯仪宜 Life OS — 全局样式
+   Apple HIG / Glassmorphism / Sage Green + Cream
+   ========================================================= */
+
+@layer base {
+  :root {
+    --bg: #F5F3EE;
+    --surface: rgba(255, 255, 255, 0.6);
+    --surface-solid: #FFFFFF;
+    --border: rgba(0, 0, 0, 0.06);
+    --text: #2A2D28;
+    --text-secondary: #6B7068;
+    --text-tertiary: #9CA09A;
+    --accent: #7C9885;
+    --accent-soft: rgba(124, 152, 133, 0.12);
+  }
+
+  .dark {
+    --bg: #0F1311;
+    --surface: rgba(255, 255, 255, 0.05);
+    --surface-solid: #161B18;
+    --border: rgba(255, 255, 255, 0.08);
+    --text: #E8E6E1;
+    --text-secondary: #A9B0A8;
+    --text-tertiary: #6B736D;
+    --accent: #A3B8A2;
+    --accent-soft: rgba(163, 184, 162, 0.12);
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: theme('fontFamily.sans');
+    transition: background-color 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                color 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    /* iOS 安全区 */
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    min-height: 100vh;
+    overscroll-behavior-y: none;
+  }
+
+  /* 自定义滚动条 — 苹果风格 */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(124, 152, 133, 0.3);
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(124, 152, 133, 0.5);
+  }
+
+  /* 选中文本 */
+  ::selection {
+    background: rgba(124, 152, 133, 0.25);
+    color: inherit;
+  }
+
+  input, textarea, button {
+    font-family: inherit;
+  }
+
+  /* 去除 input number 的 spinner */
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+}
+
+@layer components {
+  /* 玻璃拟态卡片 — 核心组件 */
+  .glass {
+    background: var(--surface);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--border);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  }
+
+  .dark .glass {
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.24);
+  }
+
+  /* 实色卡片(用于需要强对比的场景) */
+  .surface {
+    background: var(--surface-solid);
+    border: 1px solid var(--border);
+  }
+
+  /* 文本工具类 */
+  .text-primary { color: var(--text); }
+  .text-secondary { color: var(--text-secondary); }
+  .text-tertiary { color: var(--text-tertiary); }
+  .text-accent { color: var(--accent); }
+
+  .bg-accent-soft { background: var(--accent-soft); }
+
+  /* 按钮基础 */
+  .btn-press {
+    transition: transform 0.15s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .btn-press:active {
+    transform: scale(0.96);
+  }
+
+  /* 毛玻璃导航 */
+  .glass-nav {
+    background: var(--surface);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid var(--border);
+  }
+}
+
+@layer utilities {
+  /* 渐变文字 */
+  .text-gradient {
+    background: linear-gradient(135deg, #A3B8A2 0%, #5E7E68 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .dark .text-gradient {
+    background: linear-gradient(135deg, #C9D6C8 0%, #7C9885 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* 隐藏滚动条 */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* iOS 安全区 padding */
+  .pt-safe {
+    padding-top: env(safe-area-inset-top);
+  }
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
