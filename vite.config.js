@@ -14,21 +14,23 @@ export default defineConfig({
       manifest: {
         name: '柯仪宜 Life OS',
         short_name: 'Life OS',
+        lang: 'zh-CN',
         description: '个人人生驾驶舱 — 让人生一点一点变好',
         theme_color: '#0F1311',
         background_color: '#0F1311',
         display: 'standalone',
         orientation: 'portrait',
-        start_url: '/',
+        start_url: '/keyi-life-os/',
+        scope: '/keyi-life-os/',
         icons: [
           {
-            src: 'icons/icon-192.png',
+            src: '/keyi-life-os/icons/icon-192.png',
             sizes: '192x192',
             type: 'image/png',
             purpose: 'any maskable'
           },
           {
-            src: 'icons/icon-512.png',
+            src: '/keyi-life-os/icons/icon-512.png',
             sizes: '512x512',
             type: 'image/png',
             purpose: 'any maskable'
