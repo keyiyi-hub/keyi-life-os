@@ -2,7 +2,8 @@ import { motion } from 'framer-motion'
 import { BarChart3 } from 'lucide-react'
 import { useMemo } from 'react'
 import { storage, dailyKey } from '../lib/storage'
-import { MOCK_MONTH_TIME, MOCK_LIFE_SCORE } from '../lib/statsMock'
+import { MOCK_MONTH_TIME } from '../lib/statsMock'
+import { generateWeeklyInsight, calculateLifeScore } from '../lib/weeklyInsight'
 import LifeScoreCard from '../components/stats/LifeScoreCard'
 import TimeDistribution from '../components/stats/TimeDistribution'
 import GoalProgress from '../components/stats/GoalProgress'
@@ -15,20 +16,19 @@ import AssetCard from '../components/stats/AssetCard'
  * 定位:不是数据统计工具,而是"这个月的自己有没有在向目标靠近"
  * 打开即知:人生状态评分 · 时间花在哪 · 目标进度 · 本周复盘 · 资产积累
  *
- * 能从真实数据聚合的就读真实数据(时间投入/目标/资产),
- * 暂无数据源的用 mock 占位(评分/AI周报),封装在 statsMock 未来可替换
+ * 所有数据均从真实记录计算(时间投入/目标/资产/周报/评分)
+ * 无数据时用 mock 兜底展示效果
  */
 export default function Stats() {
   const now = new Date()
   const monthLabel = `${now.getFullYear()}年${now.getMonth() + 1}月`
 
-  // 聚合当月时间投入(遍历该月所有 daily:*:time 记录)
+  // 聚合当月时间投入
   const monthTime = useMemo(() => {
     const year = now.getFullYear()
     const month = now.getMonth()
     const daysInMonth = new Date(year, month + 1, 0).getDate()
     const agg = {}
-
     for (let d = 1; d <= daysInMonth; d++) {
       const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`
       const dayTime = storage.get(dailyKey('time', dateStr), null)
@@ -38,11 +38,15 @@ export default function Stats() {
         }
       }
     }
-
-    // 有真实数据就用真实的,否则用 mock 兜底(展示效果)
     const hasReal = Object.values(agg).some((v) => v > 0)
     return hasReal ? agg : MOCK_MONTH_TIME
   }, [])
+
+  // 从真实数据计算人生状态评分
+  const lifeScore = useMemo(() => calculateLifeScore(), [])
+
+  // 从真实数据生成周报
+  const weeklyInsight = useMemo(() => generateWeeklyInsight(), [])
 
   return (
     <motion.div
@@ -66,7 +70,7 @@ export default function Stats() {
       </div>
 
       {/* 1. 人生状态总览 */}
-      <LifeScoreCard score={MOCK_LIFE_SCORE} monthLabel={monthLabel} />
+      <LifeScoreCard score={lifeScore} monthLabel={monthLabel} />
 
       {/* 2. 时间资产分析 */}
       <TimeDistribution monthTime={monthTime} />
@@ -75,7 +79,7 @@ export default function Stats() {
       <GoalProgress />
 
       {/* 4. AI 人生周报 */}
-      <WeeklyInsight />
+      <WeeklyInsight insight={weeklyInsight} />
 
       {/* 5. 人生资产 */}
       <AssetCard />

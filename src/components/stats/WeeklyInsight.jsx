@@ -7,18 +7,18 @@ import { MOCK_WEEKLY_INSIGHT } from '../../lib/statsMock'
 /**
  * WeeklyInsight — AI 人生周报
  * 本周亮点 / 需要注意 / 下周建议
- * 目前为固定模板,未来接 AI API
+ * 基于真实数据自动生成,未来可接 LLM API
  */
 export default function WeeklyInsight({ insight = MOCK_WEEKLY_INSIGHT }) {
   return (
     <section className="mb-4">
       <SectionTitle
         title="本周人生复盘"
-        subtitle="AI 为你生成"
+        subtitle="基于本周数据自动生成"
         accent="#5E7E68"
         right={
           <span className="text-[10px] text-tertiary bg-black/[0.03] dark:bg-white/[0.05] px-2 py-0.5 rounded-full">
-            模板
+            自动生成
           </span>
         }
       />
