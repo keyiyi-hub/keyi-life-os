@@ -4,10 +4,10 @@ import AppShell from './components/layout/AppShell'
 import PageTransition from './components/layout/PageTransition'
 import Dashboard from './pages/Dashboard'
 import TodayPlan from './pages/TodayPlan'
+import Journal from './pages/Journal'
 import TeacherCenter from './pages/TeacherCenter'
 import CreationCenter from './pages/CreationCenter'
 import WealthCenter from './pages/WealthCenter'
-import Learning from './pages/Learning'
 import HousePlan from './pages/HousePlan'
 import MomPlan from './pages/MomPlan'
 import CatProfile from './pages/CatProfile'
@@ -28,10 +28,10 @@ export default function App() {
           <Routes location={location}>
             <Route path="/" element={<Dashboard />} />
             <Route path="/today" element={<TodayPlan />} />
+            <Route path="/journal" element={<Journal />} />
             <Route path="/teacher" element={<TeacherCenter />} />
             <Route path="/creation" element={<CreationCenter />} />
             <Route path="/wealth" element={<WealthCenter />} />
-            <Route path="/learning" element={<Learning />} />
             <Route path="/house" element={<HousePlan />} />
             <Route path="/mom" element={<MomPlan />} />
             <Route path="/cats" element={<CatProfile />} />

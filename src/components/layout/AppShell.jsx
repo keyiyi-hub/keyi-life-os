@@ -1,11 +1,13 @@
 import { Outlet } from 'react-router-dom'
 import Sidebar from './Sidebar'
 import MobileTabBar from './MobileTabBar'
+import AiAssistant from '../ai/AiAssistant'
 
 /**
  * AppShell — 整体布局
  * PC: 左侧 Sidebar + 右侧内容
  * 移动: 顶部内容 + 底部 TabBar
+ * 右下角: AI 助手悬浮按钮(全局)
  */
 export default function AppShell() {
   return (
@@ -18,6 +20,7 @@ export default function AppShell() {
         </div>
       </main>
       <MobileTabBar />
+      <AiAssistant />
     </div>
   )
 }

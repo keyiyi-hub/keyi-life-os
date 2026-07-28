@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion'
-import { Moon, Sun, Monitor, Leaf, Github, Heart } from 'lucide-react'
+import { Moon, Sun, Monitor, Leaf, Github, Heart, Sparkles, ExternalLink } from 'lucide-react'
+import { useState } from 'react'
 import { useTheme } from '../context/ThemeContext'
 import { useApp } from '../context/AppContext'
+import { useLocalStorage } from '../lib/useLocalStorage'
 import GlassCard from '../components/ui/GlassCard'
 import SectionTitle from '../components/ui/SectionTitle'
 import { storage } from '../lib/storage'
@@ -16,12 +18,21 @@ const THEME_OPTIONS = [
 export default function Settings() {
   const { theme, setTheme } = useTheme()
   const { today } = useApp()
+  const [aiKey, setAiKey] = useLocalStorage('settings:aiKey', '')
+  const [keyInput, setKeyInput] = useState(aiKey)
+  const [keySaved, setKeySaved] = useState(false)
 
   const handleClearData = () => {
-    if (window.confirm('确定要清空所有数据吗？此操作不可恢复。')) {
+    if (window.confirm('确定要清���所有数据吗？此操作不可恢复。')) {
       storage.clear()
       window.location.reload()
     }
+  }
+
+  const saveKey = () => {
+    setAiKey(keyInput.trim())
+    setKeySaved(true)
+    setTimeout(() => setKeySaved(false), 2000)
   }
 
   return (
@@ -70,6 +81,43 @@ export default function Settings() {
               </motion.button>
             )
           })}
+        </div>
+      </GlassCard>
+
+      {/* AI 助手 */}
+      <GlassCard className="mb-5">
+        <SectionTitle title="AI 助手" subtitle="自然语言识别引擎" accent="#5E7E68" />
+        <div className="space-y-3">
+          <div>
+            <label className="text-[13px] text-secondary mb-1.5 block">Gemini API Key</label>
+            <div className="flex gap-2">
+              <input
+                type="password"
+                value={keyInput}
+                onChange={(e) => setKeyInput(e.target.value)}
+                placeholder="AIza..."
+                className="flex-1 bg-black/[0.03] dark:bg-white/[0.05] rounded-xl px-3 py-2.5 text-[13px] text-primary placeholder:text-tertiary outline-none"
+              />
+              <motion.button
+                whileTap={{ scale: 0.95 }}
+                onClick={saveKey}
+                className="px-4 py-2.5 rounded-xl bg-sage-400 dark:bg-sage-300 text-white dark:text-ink-900 text-[13px] font-medium"
+              >
+                {keySaved ? '已保存 ✓' : '保存'}
+              </motion.button>
+            </div>
+            <p className="text-[11px] text-tertiary mt-2">
+              {aiKey ? '✓ 已配置，AI 助手将使用 Gemini 识别' : '未配置时使用规则匹配（本地运行）'}
+            </p>
+            <a
+              href="https://aistudio.google.com/apikey"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[11px] text-accent inline-flex items-center gap-1 mt-1"
+            >
+              免费获取 API Key <ExternalLink size={11} />
+            </a>
+          </div>
         </div>
       </GlassCard>
 

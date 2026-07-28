@@ -26,6 +26,7 @@ const EMPTY = {
   q4: false, // 今天有没有创作
   q5: false, // 今天有没有运动
   q6: '', // 明天最重要的一件事
+  q7: '', // 今天感谢什么
   done: false,
   savedAt: null
 }
@@ -117,6 +118,7 @@ export default function DailyReview() {
     { key: 'q3', icon: Heart, label: '今天身体状态？', type: 'textarea', ph: '睡得好吗？累不累？想对自己说点什么' },
     { key: 'q4', icon: Clapperboard, label: '今天有没有创作？', type: 'toggle' },
     { key: 'q5', icon: Dumbbell, label: '今天有没有运动？', type: 'toggle' },
+    { key: 'q7', icon: Heart, label: '今天感谢什么？', type: 'textarea', ph: '一个细节、一个人、一件小事…' },
     { key: 'q6', icon: Target, label: '明天最重要的一件事？', type: 'input', ph: '为明天的自己留一句话' }
   ]
 
