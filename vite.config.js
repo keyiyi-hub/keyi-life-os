@@ -40,7 +40,18 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
+        // 导航请求始终走网络，确保 HTML 拿到最新版本（JS hash 变了就会更新）
+        navigateFallback: null,
         runtimeCaching: [
+          {
+            // HTML 导航请求：网络优先，网络失败才用缓存
+            urlPattern: /\/keyi-life-os\/?$/,
+            handler: 'NetworkFirst',
+            options: {
+              cacheName: 'html-cache',
+              networkTimeoutSeconds: 3
+            }
+          },
           {
             urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
             handler: 'CacheFirst',
