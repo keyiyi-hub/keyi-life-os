@@ -3,7 +3,7 @@ import { storage } from '../lib/storage'
 
 // =========================================================
 // ThemeContext — 深浅色模式(跟随系统 + 手动切换 + 持久化)
-// 深色模式为默认,呼应"晚上关闭"的驾驶舱氛围
+// 浅色模式为默认,保证内容清晰可读
 // =========================================================
 
 const ThemeContext = createContext(null)
@@ -27,7 +27,7 @@ function applyTheme(mode) {
 }
 
 export function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState(() => storage.get(THEME_KEY, 'dark'))
+  const [theme, setTheme] = useState(() => storage.get(THEME_KEY, 'light'))
 
   useEffect(() => {
     applyTheme(theme)

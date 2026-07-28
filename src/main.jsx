@@ -7,7 +7,7 @@ import { AppProvider } from './context/AppContext'
 import './index.css'
 
 // GitHub Pages 子路径适配
-const basename = import.meta.env.BASE_URL.replace(/\/$/, '')
+const basename = import.meta.env.BASE_URL === '/' ? undefined : import.meta.env.BASE_URL.replace(/\/$/, '')
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
